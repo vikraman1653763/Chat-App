@@ -55,14 +55,14 @@ export const userDummyData = [
         "email": "test2@greatstack.dev",
         "fullName": "Martin Johnson",
         "profilePic": profile_martin,
-        "bio": "Hi Everyone, I am Using QuickChat",
+        "bio": "Hi Everyone, I am Using vikChat",
     },
     {
         "_id": "680f510af10f3cd28382ed01",
         "email": "test3@greatstack.dev",
         "fullName": "Enrique Martinez",
         "profilePic": profile_enrique,
-        "bio": "Hi Everyone, I am Using QuickChat",
+        "bio": "Hi Everyone, I am Using QuChat",
     },
     {
         "_id": "680f5137f10f3cd28382ed10",
