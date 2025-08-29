@@ -6,50 +6,50 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 const ChatContainer = () => {
-  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } =
+  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages , openRightSidebar, closeRightSidebar} =
     useContext(ChatContext);
   const { authUser, onlineUsers } = useContext(AuthContext);
-
   const scrollEnd = useRef();
-
   const [input, setInput] = useState("");
-
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return null;
     await sendMessage({ text: input.trim() });
     setInput("");
   };
+
   const handleSendImage = async (e) => {
     const file = e.target.files[0];
     if (!file || !file.type.startsWith("image/")) {
       toast.error("Select an image file");
       return;
     }
+  
     const reader = new FileReader();
     reader.onloadend = async () => {
       await sendMessage({ image: reader.result });
       e.target.value = "";
     };
+  
     reader.readAsDataURL(file);
+  
   };
 
-  useEffect(()=>{
-    if (selectedUser){
-      getMessages(selectedUser._id)
+  useEffect(() => {
+    if (selectedUser) {
+      getMessages(selectedUser._id);
     }
-  },[selectedUser])
-  
+  }, [selectedUser]);
+
   useEffect(() => {
     if (scrollEnd.current && messages) {
       scrollEnd.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
-
   return selectedUser ? (
-    <div className=" h-full overflow-scroll relative backdrop-blur-lg">
-      <div className=" flex items-center gap-3 py-3 mx-4 border-b border-stone-500">
+    <div className=" h-full overflow-scroll relative backdrop-blur-lg ">
+      <div className=" flex items-center gap-3 py-3 mx-4 border-b border-stone-500 ">
         <img
           src={selectedUser.profilePic || assets.avatar_icon}
           alt="profile"
@@ -65,13 +65,16 @@ const ChatContainer = () => {
         <img
           src={assets.arrow_icon}
           alt="arrow icon"
-          onClick={() => setSelectedUser(null)}
-          className="md:hidden max-w-7"
+          onClick={closeRightSidebar}
+          className="md:hidden max-w-7 cursor-pointer"
         />
+
+        {/* Open sidebar (help) */}
         <img
           src={assets.help_icon}
           alt="help icon"
-          className="max-md:hidden max-w-5"
+          onClick={openRightSidebar}
+          className="max-md:hidden max-w-5 cursor-pointer"
         />
       </div>
       <div className=" flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6">
@@ -105,9 +108,9 @@ const ChatContainer = () => {
             <div className="text-center text-xs ">
               <img
                 src={
-                  msg.senderId === authUser._id ?authUser?.profilePic
-                    || assets.avatar_icon:selectedUser?.profilePic||
-                    assets.profile_martin
+                  msg.senderId === authUser._id
+                    ? authUser?.profilePic || assets.avatar_icon
+                    : selectedUser?.profilePic || assets.profile_martin
                 }
                 alt="avatar icon"
                 className="w-7 rounded-full"

@@ -15,7 +15,10 @@ export const ChatProvider = ({ children }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState({});
   const { socket, axios } = useContext(AuthContext);
-
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
+  const openRightSidebar = () => setIsRightSidebarOpen(true);
+  const closeRightSidebar = () => setIsRightSidebarOpen(false);
+  const toggleRightSidebar = () => setIsRightSidebarOpen((v) => !v);
   // Fetch all users for sidebar + unseen counts
   const getUsers = async () => {
     try {
@@ -128,6 +131,10 @@ export const ChatProvider = ({ children }) => {
     sendMessage,
     unseenMessages,
     setUnseenMessages,
+    isRightSidebarOpen,
+    openRightSidebar,
+    closeRightSidebar,
+    toggleRightSidebar,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
