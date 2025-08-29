@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 const ChatContainer = () => {
-  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages , openRightSidebar, closeRightSidebar} =
+  const { messages, selectedUser, selectUser, sendMessage, getMessages , openRightSidebar} =
     useContext(ChatContext);
   const { authUser, onlineUsers } = useContext(AuthContext);
   const scrollEnd = useRef();
@@ -65,7 +65,7 @@ const ChatContainer = () => {
         <img
           src={assets.arrow_icon}
           alt="arrow icon"
-          onClick={closeRightSidebar}
+          onClick={() => selectUser(null)}
           className="md:hidden max-w-7 cursor-pointer"
         />
 
