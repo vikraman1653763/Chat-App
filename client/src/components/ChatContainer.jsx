@@ -78,6 +78,7 @@ const ChatContainer = () => {
         />
       </div>
       <div className=" flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6">
+        
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -110,7 +111,7 @@ const ChatContainer = () => {
                 src={
                   msg.senderId === authUser._id
                     ? authUser?.profilePic || assets.avatar_icon
-                    : selectedUser?.profilePic || assets.profile_martin
+                    : selectedUser?.profilePic || assets.avatar_icon
                 }
                 alt="avatar icon"
                 className="w-7 rounded-full"
