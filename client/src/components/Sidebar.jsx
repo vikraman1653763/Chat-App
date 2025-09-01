@@ -78,6 +78,7 @@ const SideBar = () => {
         </div>
       </div>
 
+
       <div className="flex flex-col">
         {filteredUsers.map((user) => {
           const unseen = unseenMessages?.[user._id] || 0;

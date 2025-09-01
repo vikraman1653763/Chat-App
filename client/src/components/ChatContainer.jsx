@@ -68,7 +68,7 @@ const ChatContainer = () => {
           onClick={() => selectUser(null)}
           className="md:hidden max-w-7 cursor-pointer"
         />
-
+          
         {/* Open sidebar (help) */}
         <img
           src={assets.help_icon}
